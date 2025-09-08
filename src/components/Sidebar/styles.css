@@ -1,0 +1,50 @@
+/* src/components/Sidebar/styles.css */
+
+.sidebar {
+  /* width: 300px; */
+  background-color: #16161a; /* Cor de fundo mais escura */
+  color: #f0f0f0;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -300px; /* Esconde o menu para a esquerda, usando a mesma largura */
+  transition: left 0.3s ease-in-out; 
+  z-index: 999; /* Este é o ponto crucial: um valor alto para sobrepor o conteúdo */
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Sombra mais visível */
+  padding-top: 60px; /* Espaço para o botão do menu */
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar h2 {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 5px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ccc;
+  display: block;
+  padding: 12px;
+  border-radius: 6px; /* Aumenta o arredondamento */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+  background-color: #7f5af0;
+  color: #fff;
+}

@@ -1,0 +1,90 @@
+/* src/components/PokemonCard/styles.css */
+
+.pokemon-card-link {
+  text-decoration: none;
+  color: inherit;
+  background-color: red;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-image 0.5s ease, background-color 0.5s ease;
+  cursor: pointer;
+}
+.pokemon-card-link:hover {
+  transform: translateY(-5px);
+}
+
+.card-hover-bg {
+    /* Cores padrão mais escuras para o hover */
+    --dark-normal-color: #7b7b59;
+    --dark-fire-color: #9c531d;
+    --dark-water-color: #44599a;
+    --dark-grass-color: #4a7d3a;
+    --dark-electric-color: #a18e22;
+    --dark-ice-color: #688484;
+    --dark-fighting-color: #7b201a;
+    --dark-poison-color: #6b2e6b;
+    --dark-ground-color: #8c7333;
+    --dark-flying-color: #72629b;
+    --dark-psychic-color: #993b58;
+    --dark-bug-color: #717b1b;
+    --dark-rock-color: #7b6d2a;
+    --dark-ghost-color: #4b3b64;
+    --dark-dragon-color: #47239d;
+    --dark-steel-color: #7b7b91;
+    --dark-dark-color: #483a30;
+    --dark-fairy-color: #92626e;
+}
+
+.pokemon-card h3 {
+  text-transform: capitalize;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.pokemon-card-image img {
+  width: 150px; /* Aumenta o tamanho da imagem */
+  height: auto;
+}
+
+.pokemon-types {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pokemon-type {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+/* Cores para cada tipo (mantenha o que você já tem) */
+.normal { background-color: #A8A878 }
+.fire { background-color: #F08030 }
+.water { background-color: #6890F0 }
+.grass  { background-color: #78C850 }
+.electric { background-color: #F8D030 }
+.ice { background-color: #98D8D8 }
+.fighting { background-color: #C03028 }
+.poisonc { background-color: #A040A0 }
+.groundc { background-color: #E0C068 }
+.flyingc { background-color: #A890F0 }
+.psychic { background-color: #F85888 }
+.bug { background-color: #A8B820 }
+.rock { background-color: #B8A038 }
+.ghost { background-color: #705898 }
+.dragon { background-color: #7038F8 }
+.steel { background-color: #B8B8D0 }
+.dark { background-color: #705848 }
+.fairy { background-color: #EE99AC }
+.stellar { background-color: #449692 }
+.unknown { background-color: #68A090 }
+

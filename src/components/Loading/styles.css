@@ -1,0 +1,26 @@
+/* src/components/Loading/styles.css */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Ocupa uma boa parte da tela */
+  color: #ccc;
+  font-size: 1.2em;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #444; /* Cor da borda */
+  border-top-color: #f0f0f0; /* Cor do spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Animação de rotação */
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

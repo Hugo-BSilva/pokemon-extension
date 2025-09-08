@@ -1,0 +1,176 @@
+/* src/pages/Home/styles.css */
+
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 20px;
+  text-align: center; /* Centraliza o texto */
+}
+
+.home-container h1 {
+  font-size: 2.5em;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  color: #fff; /* Título branco */
+}
+
+.container-pokedex-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242629;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.search-input {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #2c2c2c;
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+@media (min-width: 420px) {
+    .pokemon-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Desktop: 3 colunas */
+@media (min-width: 769px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop widescreen: 4 colunas */
+@media (min-width: 1025px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.pokemon-grid {
+  display: grid;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  background-color: #16161a;
+}
+
+
+
+/* ===== Container principal ===== */
+.type-filters-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* impede barra de rolagem aparecer */
+  margin: 20px 0;
+}
+
+/* ===== Lista horizontal ===== */
+.type-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 40px; /* espaço interno p/ não colar nas setas */
+  scrollbar-width: none; /* Firefox */
+}
+
+.type-filters::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ===== Botões de tipo ===== */
+.type-button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.type-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.type-button.active {
+  border: 2px solid #16161a;
+}
+
+/* ===== Botões de scroll ===== */
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  z-index: 10;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.scroll-button:hover {
+  background: #94a1b2;
+  /* transform: translateY(-50%) scale(1.1); */
+}
+
+.scroll-button.left {
+  left: 5px;
+}
+
+.scroll-button.right {
+  right: 5px;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .scroll-button {
+    display: none; /* no mobile só arrasta igual stories */
+  }
+}
+
+/* Cores para cada tipo (mantenha o que você já tem) */
+/* src/pages/Home/styles.css */
+
+/* ... outros estilos ... */
+.type-button.all, .type-tag.all { background-color: #fff; color: #000; }
+.type-button.normal, .type-tag.normal { background-color: #A8A878; color: #fff; }
+.type-button.fire, .type-tag.fire { background-color: #F08030; color: #fff; }
+.type-button.water, .type-tag.water { background-color: #6890F0; color: #fff; }
+.type-button.grass, .type-tag.grass { background-color: #78C850; color: #fff; }
+.type-button.electric, .type-tag.electric { background-color: #F8D030; color: #000; }
+.type-button.ice, .type-tag.ice { background-color: #98D8D8; color: #000; }
+.type-button.fighting, .type-tag.fighting { background-color: #C03028; color: #fff; }
+.type-button.poison, .type-tag.poison { background-color: #A040A0; color: #fff; }
+.type-button.ground, .type-tag.ground { background-color: #E0C068; color: #000; }
+.type-button.flying, .type-tag.flying { background-color: #A890F0; color: #000; }
+.type-button.psychic, .type-tag.psychic { background-color: #F85888; color: #fff; }
+.type-button.bug, .type-tag.bug { background-color: #A8B820; color: #fff; }
+.type-button.rock, .type-tag.rock { background-color: #B8A038; color: #fff; }
+.type-button.ghost, .type-tag.ghost { background-color: #705898; color: #fff; }
+.type-button.dragon, .type-tag.dragon { background-color: #7038F8; color: #fff; }
+.type-button.steel, .type-tag.steel { background-color: #B8B8D0; color: #000; }
+.type-button.dark, .type-tag.dark { background-color: #705848; color: #fff; }
+.type-button.fairy, .type-tag.fairy { background-color: #EE99AC; color: #000; }
+.type-button.stellar, .type-tag.stellar { background-color: #449692; color: #fff; }
+.type-button.unknown, .type-tag.unknown { background-color: #68A090; color: #fff; }

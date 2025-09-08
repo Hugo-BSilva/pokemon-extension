@@ -1,0 +1,122 @@
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 20px;
+  text-align: center; /* Centraliza o texto */
+}
+
+.home-container h1 {
+  font-size: 2.5em;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  color: #fff; /* Título branco */
+}
+
+.container-pokedex-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242629;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.container-types-scroll{
+  background-color: #242629;
+}
+
+.search-input {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #94a1b2;
+  background-color: #242629;
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+/* ===== Container principal ===== */
+.type-filters-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* impede barra de rolagem aparecer */
+  margin: 20px 0;
+}
+
+/* ===== Lista horizontal ===== */
+.type-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 40px; /* espaço interno p/ não colar nas setas */
+  scrollbar-width: none; /* Firefox */
+}
+
+.type-filters::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ===== Botões de tipo ===== */
+.type-button {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.type-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.type-button.active {
+  border: 2px solid #16161a;
+}
+
+/* ===== Botões de scroll ===== */
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  z-index: 10;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.scroll-button:hover {
+  background: #94a1b2;
+  /* transform: translateY(-50%) scale(1.1); */
+}
+
+.scroll-button.left {
+  left: 5px;
+}
+
+.scroll-button.right {
+  right: 5px;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 390px) {
+  .scroll-button {
+    display: none; /* no mobile só arrasta igual stories */
+  }
+}
