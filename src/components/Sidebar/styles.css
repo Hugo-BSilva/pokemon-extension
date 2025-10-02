@@ -1,14 +1,15 @@
 /* src/components/Sidebar/styles.css */
 
 .sidebar {
-  /* width: 300px; */
+  width: 250px;
   background-color: #16161a; /* Cor de fundo mais escura */
   color: #f0f0f0;
+  text-align: center;
   height: 100vh;
   position: fixed;
   top: 0;
   left: -300px; /* Esconde o menu para a esquerda, usando a mesma largura */
-  transition: left 0.3s ease-in-out; 
+  transition: left 0.3s ease-in-out;
   z-index: 999; /* Este é o ponto crucial: um valor alto para sobrepor o conteúdo */
   padding: 20px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Sombra mais visível */
@@ -47,4 +48,35 @@
 .sidebar a:hover {
   background-color: #7f5af0;
   color: #fff;
+}
+
+/* 💡 ESTILO DO OVERLAY (Backdrop) */
+.sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparente para indicar que o fundo está desativado */
+    z-index: 998; /* Deve ficar ABAIXO da sidebar (999) mas ACIMA do conteúdo principal */
+    cursor: pointer;
+}
+
+/* 💡 ESTILO DO BOTÃO DE FECHAR */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #7f5af0;
 }

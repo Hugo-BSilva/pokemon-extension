@@ -1,139 +1,359 @@
 /* src/pages/PokemonDetail/styles.css */
 
-.pokemon-detail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background-color: #16161a;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+/* ========================================================= */
+/* VARIÁVEIS DE COR E TIPOS */
+/* ========================================================= */
 
-.pokemon-name {
-  text-transform: capitalize;
-  font-size: 2.5em;
-  color: #fff;
-  margin-bottom: 10px;
-}
+:root {
+    /* Cores de Stats */
+    --color-hp: #FF5959; /* Vermelho mais vibrante para dark mode */
+    --color-attack: #F08030;
+    --color-defense: #F8D030;
+    --color-sp-atk: #6890F0;
+    --color-sp-def: #78C850;
+    --color-speed: #F85888;
 
-.pokemon-image-container {
-  background-color: #fff;
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
+    /* Cores de Categoria de Movimento */
+    --cat-physical: #fa7268; /* Dano Físico */
+    --cat-special: #70b7ff; /* Dano Especial */
+    --cat-status: #9e9e9e; /* Status */
 
-.pokemon-image {
-  width: 150px;
-  height: 150px;
-}
-
-.pokemon-types {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.pokemon-type {
-  padding: 5px 15px;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: bold;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.pokemon-moves-container {
-  width: 100%;
-  text-align: left;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 2px solid #333;
-}
-
-.pokemon-moves-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.moves-by-game {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 20px;
-}
-
-.game-section {
-  background-color: #242629;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.game-section h3 {
-  text-transform: capitalize;
-  margin-top: 0;
-  color: #fff;
-}
-
-.moves-list {
-  list-style: none;
-  padding: 0;
-}
-
-.move-item {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* border-bottom: 1px solid #eee; */
-  padding: 8px 0;
-  gap: 10px; /* Adiciona um pequeno espaço entre os elementos */
-}
-
-.move-item:hover {
-  background-color: #94a1b244;
-  border-radius: 8px;
-}
-
-.move-item:last-child {
-  border-bottom: none;
-}
-
-.move-name {
-  text-transform: capitalize;
-  color: #fff;
-  flex: 0 1 150px; /* Permite que o elemento ocupe o espaço disponível */
-}
-
-.move-level {
-  /* font-weight: bold; */
-  color: #fff;
-  flex-shrink: 0;
+    /* Cores de Tipo (Mantidas as suas cores originais) */
+    --type-normal: #a8a878;
+    --type-fire: #f08030;
+    --type-water: #6890f0;
+    --type-grass: #78c850;
+    --type-electric: #f8d030;
+    --type-ice: #98d8d8;
+    --type-fighting: #c03028;
+    --type-poison: #a040a0;
+    --type-ground: #e0c068;
+    --type-flying: #a890f0;
+    --type-psychic: #f85888;
+    --type-bug: #a8b820;
+    --type-rock: #b8a038;
+    --type-ghost: #705898;
+    --type-dragon: #7038f8;
+    --type-steel: #b8b8d0;
+    --type-dark: #705848;
+    --type-fairy: #ee99ac;
 }
 
 /* Tipos de Pokémon para estilização específica */
-.normal { background-color: #a8a878;}
-.fire { background-color: #f08030; }
-.water { background-color: #6890f0; }
-.grass { background-color: #78c850; }
-.electric { background-color: #f8d030; }
-.ice { background-color: #98d8d8; }
-.fighting { background-color: #c03028; }
-.poison { background-color: #a040a0; }
-.ground { background-color: #e0c068; }
-.flying { background-color: #a890f0; }
-.psychic { background-color: #f85888; }
-.bug { background-color: #a8b820; }
-.rock { background-color: #b8a038; }
-.ghost { background-color: #705898; }
-.dragon { background-color: #7038f8; }
-.steel { background-color: #b8b8d0; }
-.dark { background-color: #705848; }
-.fairy { background-color: #ee99ac; }
+.type-normal { background-color: var(--type-normal);}
+.type-fire { background-color: var(--type-fire); }
+.type-water { background-color: var(--type-water); }
+.type-grass { background-color: var(--type-grass); }
+.type-electric { background-color: var(--type-electric); }
+.type-ice { background-color: var(--type-ice); }
+.type-fighting { background-color: var(--type-fighting); }
+.type-poison { background-color: var(--type-poison); }
+.type-ground { background-color: var(--type-ground); }
+.type-flying { background-color: var(--type-flying); }
+.type-psychic { background-color: var(--type-psychic); }
+.type-bug { background-color: var(--type-bug); }
+.type-rock { background-color: var(--type-rock); }
+.type-ghost { background-color: var(--type-ghost); }
+.type-dragon { background-color: var(--type-dragon); }
+.type-steel { background-color: var(--type-steel); }
+.type-dark { background-color: var(--type-dark); }
+.type-fairy { background-color: var(--type-fairy); }
+
+
+/* ========================================================= */
+/* ESTRUTURA E ELEMENTOS BASE (MANTENDO DARK MODE) */
+/* ========================================================= */
+
+body {
+    background-color: #0b0c10; /* Fundo geral do app mais escuro */
+}
+
+.pokemon-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #16161a; /* Fundo do Card Principal */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra mais intensa */
+    color: #fff; /* Cor do texto padrão */
+}
+
+.pokemon-name {
+    text-transform: capitalize;
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.pokemon-image-container {
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.pokemon-image {
+    width: 150px;
+    height: 150px;
+}
+
+.pokemon-types {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pokemon-type { /* Estilo geral para o badge de tipo fora das tabelas */
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Nova seção para organizar o conteúdo */
+.pokemon-section {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.pokemon-section h2 {
+    text-align: left;
+    color: #fff;
+    border-bottom: 2px solid #333; /* Linha de separação escura */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+
+/* ========================================================= */
+/* 1. BASE STATS */
+/* ========================================================= */
+
+.stats-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed #333; /* Linha tracejada suave no modo escuro */
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-name {
+    flex: 0 0 80px;
+    font-weight: 500;
+    text-align: left;
+    color: #ccc;
+}
+
+.stat-value {
+    flex: 0 0 35px;
+    text-align: right;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stat-bar-container {
+    flex-grow: 1;
+    height: 14px;
+    background-color: #242629; /* Fundo da barra escuro */
+    border-radius: 7px;
+    margin-left: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.stat-bar {
+    height: 100%;
+    border-radius: 7px 0 0 7px;
+    transition: width 0.7s ease-out; /* Animação mais suave */
+}
+
+/* Cores das Barras (Usando as variáveis) */
+.stat-bar.hp { background-color: var(--color-hp); }
+.stat-bar.attack { background-color: var(--color-attack); }
+.stat-bar.defense { background-color: var(--color-defense); }
+.stat-bar.special-attack { background-color: var(--color-sp-atk); }
+.stat-bar.special-defense { background-color: var(--color-sp-def); }
+.stat-bar.speed { background-color: var(--color-speed); }
+
+.total-row {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    padding-top: 10px;
+}
+.total-row .stat-value {
+    color: #4CAF50; /* Cor de destaque verde para o total */
+}
+
+
+/* ========================================================= */
+/* 2. EVOLUTION CHART */
+/* ========================================================= */
+
+.evolution-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.pokemon-evo-step {
+    text-align: center;
+    font-size: 14px;
+}
+
+.evo-sprite {
+    width: 96px;
+    height: 96px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1)); /* Sombra suave na imagem */
+}
+
+.evo-details {
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.evo-name {
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.evo-types .evo-type-badge {
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    margin: 0 2px;
+}
+
+.evo-arrow {
+    font-size: 30px;
+    font-weight: 300;
+    color: #555; /* Seta discreta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.level-detail {
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+}
+
+
+/* ========================================================= */
+/* 3. TABELA DE MOVES POR LEVEL UP */
+/* ========================================================= */
+
+.moves-by-game-section {
+    width: 100%;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.moves-by-game-section h3 {
+    text-align: left;
+    color: #fff; /* Destaque verde para o nome do jogo */
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.moves-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.moves-table th, .moves-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #242629; /* Borda da célula escura */
+    color: #fff;
+}
+
+.moves-table th {
+    background-color: #242629;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #eee;
+}
+
+.moves-table tbody tr {
+    background-color: #1a1c20;
+    transition: background-color 0.3s ease;
+}
+
+.moves-table tbody tr:hover {
+    background-color: #2e3136; /* Hover mais claro */
+}
+
+/* Badge de Tipo dentro da tabela */
+.type-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 0.8em;
+}
+
+/* Ícones de Categoria (Cat.) - Usando cores de variável */
+.category-icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.cat-physical {
+    background-color: var(--cat-physical);
+    border: 1px solid #c0392b;
+}
+
+.cat-special {
+    background-color: var(--cat-special);
+    border: 1px solid #2980b9;
+}
+
+.cat-status {
+    background-color: var(--cat-status);
+    border: 1px solid #7f8c8d;
+}
+
+.moves-table td:nth-child(2) { /* Estiliza o nome do movimento */
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 500;
+}

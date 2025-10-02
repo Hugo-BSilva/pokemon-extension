@@ -57,7 +57,7 @@ const Region = () => {
     <div className="home-container">
       {/* Aqui a verificação para `regionName` evita o erro de `charAt` */}
       <div className="container-pokedex-search">
-        <h1>{regionName ? `Região ${regionName.charAt(0).toUpperCase() + regionName.slice(1)}` : 'Pokédex'}</h1>
+        <h1>{regionName ? `Region ${regionName.charAt(0).toUpperCase() + regionName.slice(1)}` : 'Pokédex'}</h1>
 
         <input
           type="text"

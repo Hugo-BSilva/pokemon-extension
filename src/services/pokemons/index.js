@@ -1,3 +1,4 @@
+import { version } from 'react';
 import { POKEAPI_BASE_URL } from '../../constants/api';
 
 const handleResponse = async (response) => {
@@ -18,6 +19,7 @@ export const getAllPokemons = async (limit = 20, offset = 20) => {
         const pokeResponse = await fetch(pokemon.url);
         const pokeData = await pokeResponse.json();
 
+         // Log para depuração
         return {
           id: pokeData.id,
           name: pokeData.name,
@@ -27,15 +29,12 @@ export const getAllPokemons = async (limit = 20, offset = 20) => {
       })
     );
 
-    // CORREÇÃO: Retorne um objeto com 'results' e 'next'.
     return { results: detailedPokemons, next: data.next };
   } catch (error) {
     console.error(`Erro ao buscar Pokémons:`, error);
     throw error;
   }
 };
-
-// src/services/pokemons.js
 
 export const getRegionPokemons = async (regionName) => {
  try {
@@ -89,106 +88,156 @@ export const getRegionPokemons = async (regionName) => {
  }
 };
 
-// export const getPokemonDetails = async (pokemonName) => {
-//   try {
-//     const response = await fetch(`${POKEAPI_BASE_URL}/pokemon/${pokemonName}`);
-//     const data = await handleResponse(response);
+const VERSION_ORDER = {
+    'red-blue': 1,
+    'yellow': 2,
+    'gold-silver': 3,
+    'crystal': 4,
+    'ruby-sapphire': 5,
+    'emerald': 6,
+    'firered-leafgreen': 7,
+    'diamond-pearl': 8,
+    'platinum': 9,
+    'heartgold-soulsilver': 10,
+    'black-white': 11,
+    'black-2-white-2': 12,
+    'x-y': 13,
+    'omega-ruby-alpha-sapphire': 14,
+    'sun-moon': 15,
+    'ultra-sun-ultra-moon': 16,
+    'lets-go-pichu-evee': 17,
+    'sword-shield': 18,
+    // Você pode adicionar mais grupos de versão aqui conforme necessário
+  };
 
-//     // Processar os dados para extrair os detalhes que você precisa
-//     const movesByVersion = await Promise.all(
-//       data.moves.map(async moveData => {
-//         const moveName = moveData.move.name;
-//         const responseTypeMove = await fetch(`https://pokeapi.co/api/v2/move/${moveName}`);
-//         const dataTypeMove = await handleResponse(responseTypeMove);
-//         const typeMoveName = dataTypeMove.type.name;
+// =========================================================================
+// FUNÇÃO AUXILIAR: Extrai a cadeia de evolução recursivamente
+// =========================================================================
+const getEvolutionChain = (chain) => {
+    const evolutions = [];
+    let current = chain;
 
-//         moveData.version_group_details.forEach(versionDetail => {
-//           const versionName = versionDetail.version_group.name;
-//           const levelLearned = versionDetail.level_learned_at;
+    while (current) {
+        // Nome e ID do Pokémon atual na cadeia
+        const pokemonName = current.species.name;
+        const urlParts = current.species.url.split('/');
+        const pokemonId = urlParts[urlParts.length - 2];
 
-//           // Só queremos movimentos aprendidos por level-up
-//           if (versionDetail.move_learn_method.name === 'level-up' && levelLearned > 0) {
-//             if (!movesByVersion[versionName]) {
-//               movesByVersion[versionName] = [];
-//             }
-//             movesByVersion[versionName].push({
-//               type: typeMoveName,
-//               name: moveName,
-//               level: levelLearned,
-//             });
-//           }
-//         });
-//       })
-//     )
+        // Dados de evolução
+        let evolutionDetails = null;
+        if (current.evolution_details && current.evolution_details.length > 0) {
+            // Pega o primeiro detalhe, que geralmente é suficiente
+            const details = current.evolution_details[0];
+            evolutionDetails = {
+                trigger: details.trigger.name,
+                level: details.min_level,
+                item: details.item ? details.item.name : null,
+                // Adicione outros detalhes se necessário
+            };
+        }
 
-//     // Ordenar os movimentos por nível
-//     for (const version in movesByVersion) {
-//       movesByVersion[version].sort((a, b) => a.level - b.level);
-//     }
+        evolutions.push({
+            id: pokemonId,
+            name: pokemonName,
+            details: evolutionDetails,
+        });
 
-//     return {
-//       id: data.id,
-//       name: data.name,
-//       image: data.sprites.front_default,
-//       types: data.types.map(typeInfo => typeInfo.type.name),
-//       movesByVersion,
-//     };
-//   } catch (error) {
-//     console.error(`Erro ao buscar detalhes do Pokémon ${pokemonName}:`, error);
-//     throw error; // <== Ação correta: lança o erro para o hook
-//   }
-// };
+        // Move para a próxima evolução
+        current = current.evolves_to[0];
+    }
+    return evolutions;
+};
 
 export const getPokemonDetails = async (pokemonName) => {
  try {
   const response = await fetch(`${POKEAPI_BASE_URL}/pokemon/${pokemonName}`);
   const data = await handleResponse(response);
 
-  // CORREÇÃO: Usar Promise.all para esperar todas as requisições de tipo
-  const movesWithTypes = await Promise.all(
-   data.moves.map(async (moveData) => {
-    const moveName = moveData.move.name;
-    const responseTypeMove = await fetch(`https://pokeapi.co/api/v2/move/${moveName}`);
-    const dataTypeMove = await handleResponse(responseTypeMove);
-    const typeMoveName = dataTypeMove.type.name;
+  // 1. Busca dados da ESPÉCIE para obter a URL da cadeia de evolução
+  const speciesResponse = await fetch(data.species.url);
+  const speciesData = await handleResponse(speciesResponse);
 
-    return {
-     ...moveData,
-     type: typeMoveName
-    };
-   })
+  // 2. Busca a Cadeia de Evolução
+  const chainResponse = await fetch(speciesData.evolution_chain.url);
+  const chainData = await handleResponse(chainResponse);
+  const evolutionChain = getEvolutionChain(chainData.chain);
+
+  const movesWithTypes = await Promise.all(
+    data.moves.map(async (moveData) => {
+      const moveName = moveData.move.name;
+      const responseTypeMove = await fetch(`https://pokeapi.co/api/v2/move/${moveName}`);
+      const dataTypeMove = await handleResponse(responseTypeMove);
+
+      const typeMoveName = dataTypeMove.type.name;
+      const category = dataTypeMove.damage_class.name;
+      const power = dataTypeMove.power;
+      const accuracy = dataTypeMove.accuracy;
+
+      return {
+        ...moveData,
+        type: typeMoveName,
+        category: category,
+        power: power,
+        accuracy: accuracy
+      };
+    })
   );
 
+  // 4. Agrupa e Ordena Moves
   const movesByVersion = {};
   movesWithTypes.forEach(moveData => {
-   moveData.version_group_details.forEach(versionDetail => {
-    const versionName = versionDetail.version_group.name;
-    const levelLearned = versionDetail.level_learned_at;
+    moveData.version_group_details.forEach(versionDetail => {
+      const versionName = versionDetail.version_group.name;
+      const levelLearned = versionDetail.level_learned_at;
 
-    if (versionDetail.move_learn_method.name === 'level-up' && levelLearned > 0) {
-     if (!movesByVersion[versionName]) {
-      movesByVersion[versionName] = [];
-     }
-     movesByVersion[versionName].push({
-      type: moveData.type,
-      name: moveData.move.name,
-      level: levelLearned,
-     });
-    }
-   });
+      if (versionDetail.move_learn_method.name === 'level-up' && levelLearned > 0) {
+        if (!movesByVersion[versionName]) {
+          movesByVersion[versionName] = [];
+        }
+        movesByVersion[versionName].push({
+          type: moveData.type,
+          name: moveData.move.name,
+          level: levelLearned,
+          category: moveData.category,
+          power: moveData.power,
+          accuracy: moveData.accuracy
+        });
+      }
+    });
   });
 
-  // Ordenar os movimentos por nível
+  // Ordenar os movimentos por nível dentro de cada grupo
   for (const version in movesByVersion) {
-   movesByVersion[version].sort((a, b) => a.level - b.level);
+    movesByVersion[version].sort((a, b) => a.level - b.level);
   }
 
+  // 5. Ordenar os GRUPOS de Versão
+  const versionNames = Object.keys(movesByVersion);
+  const sortedVersionNames = versionNames.sort((a, b) => {
+    const orderA = VERSION_ORDER[a] || 999;
+    const orderB = VERSION_ORDER[b] || 999;
+    return orderA - orderB;
+  })
+
+  const sortedMovesByVersion = {};
+  sortedVersionNames.forEach(versionName => {
+    sortedMovesByVersion[versionName] = movesByVersion[versionName];
+  })
+
+  // 6. Extrai Base Stats
+  const baseStats = data.stats.map(statInfo => ({
+      name: statInfo.stat.name,
+      value: statInfo.base_stat
+  }));
+
   return {
-   id: data.id,
-   name: data.name,
-   image: data.sprites.front_default,
-   types: data.types.map(typeInfo => typeInfo.type.name),
-   movesByVersion,
+    id: data.id,
+    name: data.name,
+    image: data.sprites.front_default,
+    types: data.types.map(typeInfo => typeInfo.type.name),
+    movesByVersion: sortedMovesByVersion,
+    baseStats: baseStats,
+    evolutionChain: evolutionChain,
   };
  } catch (error) {
   console.error(`Erro ao buscar detalhes do Pokémon ${pokemonName}:`, error);

@@ -21,10 +21,6 @@
   margin: 10px;
 }
 
-.container-types-scroll{
-  background-color: #242629;
-}
-
 .search-input {
   width: 90%;
   max-width: 400px;
@@ -43,6 +39,10 @@
 }
 
 /* ===== Container principal ===== */
+.container-types-scroll{
+  background-color: #242629;
+}
+
 .type-filters-wrapper {
   position: relative;
   width: 100%;
@@ -82,7 +82,7 @@
 }
 
 .type-button.active {
-  border: 2px solid #16161a;
+  border: 2px solid #fff;
 }
 
 /* ===== Botões de scroll ===== */
@@ -118,5 +118,19 @@
 @media (max-width: 390px) {
   .scroll-button {
     display: none; /* no mobile só arrasta igual stories */
+  }
+
+  .type-filters {
+      padding: 10px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-button {
+    display: none; /* no mobile só arrasta igual stories */
+  }
+
+  .type-filters {
+      padding: 10px 10px;
   }
 }

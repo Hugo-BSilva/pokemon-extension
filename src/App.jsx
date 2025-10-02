@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import Region from './pages/Region';
 import PokemonDetail from './pages/PokemonDetail';
 import ErrorPage from './pages/ErrorPage';
-import './App.css'; // Mantenha o CSS padrão do Vite por enquanto
+import './App.css';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

@@ -1,5 +1,3 @@
-/* src/pages/Home/styles.css */
-
 .home-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -11,7 +9,7 @@
   font-size: 2.5em;
   margin-top: 35px;
   margin-bottom: 20px;
-  color: #fff; /* Título branco */
+  color: #fff;
 }
 
 .container-pokedex-search {
@@ -40,26 +38,6 @@
   color: #888;
 }
 
-@media (min-width: 420px) {
-    .pokemon-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Desktop: 3 colunas */
-@media (min-width: 769px) {
-    .pokemon-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* Desktop widescreen: 4 colunas */
-@media (min-width: 1025px) {
-    .pokemon-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
 .pokemon-grid {
   display: grid;
   justify-content: center;
@@ -69,20 +47,18 @@
   background-color: #16161a;
 }
 
-
-
 /* ===== Container principal ===== */
 .type-filters-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden; /* impede barra de rolagem aparecer */
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 /* ===== Lista horizontal ===== */
 .type-filters {
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 10px 40px; /* espaço interno p/ não colar nas setas */
@@ -110,7 +86,7 @@
 }
 
 .type-button.active {
-  border: 2px solid #16161a;
+  border: 2px solid #fff;
 }
 
 /* ===== Botões de scroll ===== */
@@ -143,34 +119,73 @@
 }
 
 /* ===== Responsividade ===== */
+@media (max-width: 390px) {
+  .scroll-button {
+    display: none; /* no mobile só arrasta igual stories */
+  }
+
+  .type-filters {
+      padding: 10px 15px;
+  }
+}
+
 @media (max-width: 768px) {
   .scroll-button {
     display: none; /* no mobile só arrasta igual stories */
   }
+
+  .type-filters {
+      padding: 10px 10px;
+  }
 }
 
-/* Cores para cada tipo (mantenha o que você já tem) */
-/* src/pages/Home/styles.css */
 
-/* ... outros estilos ... */
-.type-button.all, .type-tag.all { background-color: #fff; color: #000; }
-.type-button.normal, .type-tag.normal { background-color: #A8A878; color: #fff; }
-.type-button.fire, .type-tag.fire { background-color: #F08030; color: #fff; }
-.type-button.water, .type-tag.water { background-color: #6890F0; color: #fff; }
-.type-button.grass, .type-tag.grass { background-color: #78C850; color: #fff; }
-.type-button.electric, .type-tag.electric { background-color: #F8D030; color: #000; }
-.type-button.ice, .type-tag.ice { background-color: #98D8D8; color: #000; }
-.type-button.fighting, .type-tag.fighting { background-color: #C03028; color: #fff; }
-.type-button.poison, .type-tag.poison { background-color: #A040A0; color: #fff; }
-.type-button.ground, .type-tag.ground { background-color: #E0C068; color: #000; }
-.type-button.flying, .type-tag.flying { background-color: #A890F0; color: #000; }
-.type-button.psychic, .type-tag.psychic { background-color: #F85888; color: #fff; }
-.type-button.bug, .type-tag.bug { background-color: #A8B820; color: #fff; }
-.type-button.rock, .type-tag.rock { background-color: #B8A038; color: #fff; }
-.type-button.ghost, .type-tag.ghost { background-color: #705898; color: #fff; }
-.type-button.dragon, .type-tag.dragon { background-color: #7038F8; color: #fff; }
-.type-button.steel, .type-tag.steel { background-color: #B8B8D0; color: #000; }
-.type-button.dark, .type-tag.dark { background-color: #705848; color: #fff; }
-.type-button.fairy, .type-tag.fairy { background-color: #EE99AC; color: #000; }
-.type-button.stellar, .type-tag.stellar { background-color: #449692; color: #fff; }
-.type-button.unknown, .type-tag.unknown { background-color: #68A090; color: #fff; }
+
+/* Cores para cada tipo */
+.type-button.all, .type-tag.all           { background-color: #ffffff3d; }
+.type-button.normal, .type-tag.normal     { background-color: #A8A878; }
+.type-button.fire, .type-tag.fire         { background-color: #F08030; }
+.type-button.water, .type-tag.water       { background-color: #6890F0; }
+.type-button.grass, .type-tag.grass       { background-color: #78C850; }
+.type-button.electric, .type-tag.electric { background-color: #F8D030; }
+.type-button.ice, .type-tag.ice           { background-color: #98D8D8; }
+.type-button.fighting, .type-tag.fighting { background-color: #C03028; }
+.type-button.poison, .type-tag.poison     { background-color: #A040A0; }
+.type-button.ground, .type-tag.ground     { background-color: #E0C068; }
+.type-button.flying, .type-tag.flying     { background-color: #A890F0; }
+.type-button.psychic, .type-tag.psychic   { background-color: #F85888; }
+.type-button.bug, .type-tag.bug           { background-color: #A8B820; }
+.type-button.rock, .type-tag.rock         { background-color: #B8A038; }
+.type-button.ghost, .type-tag.ghost       { background-color: #705898; }
+.type-button.dragon, .type-tag.dragon     { background-color: #7038F8; }
+.type-button.steel, .type-tag.steel       { background-color: #B8B8D0; }
+.type-button.dark, .type-tag.dark         { background-color: #705848; }
+.type-button.fairy, .type-tag.fairy       { background-color: #EE99AC; }
+.type-button.stellar, .type-tag.stellar   { background-color: #449692; }
+.type-button.unknown, .type-tag.unknown   { background-color: #68A090; }
+
+.type-button-letter {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media (min-width: 420px) {
+    .pokemon-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Desktop: 3 colunas */
+@media (min-width: 769px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop widescreen: 4 colunas */
+@media (min-width: 1025px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

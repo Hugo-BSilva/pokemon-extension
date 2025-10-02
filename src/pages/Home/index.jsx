@@ -31,7 +31,7 @@ const Home = () => {
         {/* Campo de busca */}
         <input
           type="text"
-          placeholder="Buscar por nome..."
+          placeholder="Search by name..."
           value={searchTerm}
           onChange={handleSearchChange}
           className="search-input"

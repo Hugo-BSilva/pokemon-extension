@@ -2,18 +2,19 @@
 
 .pokemon-card-link {
   text-decoration: none;
+  text-transform: capitalize;
   color: inherit;
-  background-color: red;
   border: 1px solid #333;
   border-radius: 12px;
   padding: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background-image 0.5s ease, background-color 0.5s ease;
+  transition: transform 0.5s ease-out, box-shadow 0.5s ease-out, background-image 0.5s ease, background-color 0.5s ease;
   cursor: pointer;
 }
-.pokemon-card-link:hover {
+.pokemon-card-link:hover, .pokemon-card-link:active, .pokemon-card-link:focus {
   transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
 .card-hover-bg {
@@ -39,14 +40,13 @@
 }
 
 .pokemon-card h3 {
-  text-transform: capitalize;
   color: #fff;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
 .pokemon-card-image img {
-  width: 150px; /* Aumenta o tamanho da imagem */
+  width: 150px;
   height: auto;
 }
 
@@ -74,9 +74,9 @@
 .electric { background-color: #F8D030 }
 .ice { background-color: #98D8D8 }
 .fighting { background-color: #C03028 }
-.poisonc { background-color: #A040A0 }
-.groundc { background-color: #E0C068 }
-.flyingc { background-color: #A890F0 }
+.poison { background-color: #A040A0 }
+.ground { background-color: #E0C068 }
+.flying { background-color: #A890F0 }
 .psychic { background-color: #F85888 }
 .bug { background-color: #A8B820 }
 .rock { background-color: #B8A038 }
@@ -87,4 +87,3 @@
 .fairy { background-color: #EE99AC }
 .stellar { background-color: #449692 }
 .unknown { background-color: #68A090 }
-
