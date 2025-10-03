@@ -1,0 +1,128 @@
+/* src/pages/TeamBuilder/styles.css */
+
+.team-builder-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #fff; /* Cor de destaque */
+}
+
+.section-title {
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+/* 1. Seleção do Jogo (Grid) */
+.game-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.game-card {
+    background-color: #242629;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.game-card:hover {
+    box-shadow: 0 0 15px rgba(127, 90, 240, 0.4);
+    transform: scale(1.03);
+}
+
+.game-card.selected {
+    border-color: #7f5af0; /* Borda roxa para o item selecionado */
+    box-shadow: 0 0 20px rgba(127, 90, 240, 0.8);
+    background-color: #2e3136;
+}
+
+.game-boxart {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.game-name {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* 2. Seleção de Dificuldade */
+.difficulty-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.difficulty-button {
+    flex: 1;
+    max-width: 250px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #555;
+    background-color: #1a1c20;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.difficulty-button.selected {
+    background-color: #7f5af0;
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(127, 90, 240, 0.6);
+}
+
+.difficulty-label{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+/* 3. Botão Gerar */
+.generate-button {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #2cb67d; /* Verde vibrante para ação */
+    color: #16161a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 50px;
+}
+
+.generate-button:hover:not(:disabled) {
+    background-color: #38e196;
+}
+
+.generate-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    color: #ccc;
+}

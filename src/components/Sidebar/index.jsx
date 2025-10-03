@@ -55,6 +55,21 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           &times; {/* Símbolo "X" */}
         </button>
 
+        <h2 className="menu-section-title">Aplicações</h2>
+        <nav>
+            <ul>
+                <li>
+                    {/* Rota para o novo módulo */}
+                    <Link to="/team-builder" onClick={closeSidebar} className="team-builder-link">
+                        <span className="icon-wrapper">
+                            ⚙️ {/* Ícone de engrenagem como placeholder */}
+                        </span>
+                        Building Team
+                    </Link>
+                </li>
+            </ul>
+        </nav>
+
         <h2>Regions</h2>
         <nav>
           <ul>

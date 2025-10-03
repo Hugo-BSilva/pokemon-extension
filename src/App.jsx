@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar';
 import Region from './pages/Region';
 import PokemonDetail from './pages/PokemonDetail';
 import ErrorPage from './pages/ErrorPage';
+import TeamBuilder from './pages/TeamBuilder';
+import TeamCompleted from './pages/TeamCompleted';
 import './App.css';
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/region/:regionName" element={<Region />} />
             <Route path="/pokemon/:pokemonName" element={<PokemonDetail />} />
+            <Route path="/team-builder" element={<TeamBuilder />} />
+            <Route path="/team-builder-completed" element={<TeamCompleted />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </main>

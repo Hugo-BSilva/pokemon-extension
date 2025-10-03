@@ -1,0 +1,162 @@
+/* src/pages/TeamCompleted.css */
+
+/* --- Layout Principal --- */
+.team-completed-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.main-title {
+    text-align: center;
+    color: #fff; /* Azul Pokémon */
+    margin-bottom: 30px;
+    border-bottom: 2px solid #2e3136; /* Amarelo Pokémon */
+    padding-bottom: 10px;
+}
+
+/* --- Box de Resumo (Versão/Dificuldade) --- */
+.summary-box {
+    background-color: #2e3136;
+    color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* --- Grid do Time --- */
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.pokemon-card {
+    background-color: #2e3136;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px; /* Largura fixa para 3 colunas em telas maiores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.pokemon-card h2 {
+    color: #fff;
+    font-size: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* --- Seção de Movimentos --- */
+.moves-section, .matchup-section {
+  color: #fff;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+    text-align: left;
+}
+
+.moves-section h4, .matchup-section h4 {
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.moves-section ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.moves-section li {
+    padding: 3px 0;
+    color: #fff;
+}
+
+/* Estilização para o tipo do movimento */
+.move-type {
+    display: inline-block;
+    padding: 2px 6px;
+    margin-right: 5px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Classes de cor de tipo (adicione mais conforme a necessidade) */
+.move-type.water { background-color: #6390f0; }
+.move-type.ground { background-color: #deb141; }
+.move-type.dragon { background-color: #7038f8; }
+.move-type.dark { background-color: #705848; }
+.move-type.grass { background-color: #7ac74c; }
+.move-type.psychic { background-color: #f95587; }
+.move-type.ghost { background-color: #735797; }
+.move-type.poison { background-color: #a33ea1; }
+.move-type.fire { background-color: #ee8130; }
+.move-type.normal { background-color: #a8a878; }
+.move-type.steel { background-color: #b8b8d0; }
+.move-type.bug { background-color: #a6b91a; }
+.move-type.flying { background-color: #a98ff3; }
+.move-type.electric { background-color: #f7d02c; }
+.move-type.rock { background-color: #b8a038; }
+.move-type.ice { background-color: #96d9d6; }
+/* Adicione outros tipos aqui (Fighting, Fairy, etc.) */
+
+/* --- Link de Geração Nova --- */
+.generate-new-link {
+    display: block;
+    width: 250px;
+    margin: 40px auto 20px auto;
+    padding: 15px;
+    text-align: center;
+    background-color: #7f5af0; /* Amarelo Pokémon */
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* .generate-new-link:hover {
+    background-color: #e6c800;
+} */
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .team-grid {
+        gap: 15px;
+    }
+    .pokemon-card {
+        width: 45%; /* 2 colunas */
+    }
+}
+
+@media (max-width: 600px) {
+    .pokemon-card {
+        width: 90%; /* 1 coluna */
+        margin: 0 auto;
+    }
+}
