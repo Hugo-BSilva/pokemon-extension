@@ -78,7 +78,7 @@ const TeamBuilder = () => {
     setSelectedDifficulty(null); // Reseta a dificuldade ao mudar de jogo
   };
 
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  
 
   const handleGenerateTeam = async () => {
     if (!selectedGame || !selectedDifficulty) {
@@ -88,54 +88,34 @@ const TeamBuilder = () => {
 
     setLoading(true);
 
-    const API_BASE_URL = 'https://pokemon-team-builder-yj1f.onrender.com';
+    const API_BASE_URL = 'https://localhost:5001';
     const params = new URLSearchParams({
         version: selectedGame.versionGroup,
         difficulty: selectedDifficulty
     });
     const fullUrl = `${API_BASE_URL}/api/teambuilder/generate?${params.toString()}`;
 
-    // Configuração de TENTATIVAS
-    const MAX_RETRIES = 3;
-    const DELAY_MS = 5000; // 5 segundos de espera entre as tentativas
+  // Faz uma única tentativa de chamada à API (sem retries automáticos)
+  try {
+    console.log(`Chamando a API uma única vez: ${fullUrl}`);
+    const response = await fetch(fullUrl);
 
-    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-        try {
-            console.log(`Tentativa ${attempt}/${MAX_RETRIES}: Chamando a API...`);
-
-            const response = await fetch(fullUrl);
-
-            if (response.ok) {
-                const teamData = await response.json();
-                console.log("Sucesso na tentativa:", attempt);
-
-                // Sucesso: Redireciona e sai da função
-                navigate('/team-builder-completed', { state: { teamData } });
-                return;
-            }
-
-            // Se a resposta não foi OK, mas chegou (ex: 404, 500, 400), lança erro.
-            const errorText = await response.text();
-            throw new Error(`Erro do servidor (Status ${response.status}): ${errorText.substring(0, 100)}...`);
-
-        } catch (error) {
-            console.error(`Falha na Tentativa ${attempt}:`, error);
-
-            // A falha "Failed to fetch" (erro de rede/CORS/inatividade) geralmente é capturada
-            // no bloco catch. Tentamos novamente se não for a última tentativa.
-
-            if (attempt < MAX_RETRIES) {
-                alert(`Conexão falhou (Servidor Render inativo?). Tentando novamente em ${DELAY_MS / 1000} segundos... (Tentativa ${attempt + 1}/${MAX_RETRIES})`);
-                await sleep(DELAY_MS); // Aguarda antes da próxima tentativa
-            } else {
-                // Última tentativa falhou
-                alert(`Erro Crítico: Não foi possível gerar o time após ${MAX_RETRIES} tentativas. Verifique a consola para detalhes. (O servidor Render pode estar inativo ou o CORS está bloqueando).`);
-            }
-        }
+    if (response.ok) {
+      const teamData = await response.json();
+      console.log('Sucesso na chamada única da API');
+      navigate('/team-builder-completed', { state: { teamData } });
+      return;
     }
 
-    // Apenas garante que o loading sai se todas as tentativas falharem
+    // Se a resposta não foi OK, lê o texto e lança erro para o catch abaixo
+    const errorText = await response.text();
+    throw new Error(`Erro do servidor (Status ${response.status}): ${errorText.substring(0, 100)}...`);
+  } catch (error) {
+    console.error('Falha na chamada à API:', error);
+    alert('Erro: Não foi possível gerar o time. Verifique a consola para detalhes.');
+  } finally {
     setLoading(false);
+  }
   };
 
   return (
